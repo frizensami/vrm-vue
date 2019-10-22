@@ -1,10 +1,17 @@
 <template>
-<div id="graph">ASDF</div>
+
+<div id="graph-outer">
+  <FileSelect v-on:new-file="onNewFile"/>
+  <div id="graph">
+  </div>
+</div>
+
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import ForceGraph3D from '3d-force-graph'
+import FileSelect from '@/components/FileSelect.vue'
 
 export default Vue.extend({
   name: 'Graph',
@@ -15,6 +22,12 @@ export default Vue.extend({
     return {
       // Initialization
       graph: ForceGraph3D()
+    }
+  },
+  methods: {
+    onNewFile: function () {
+      console.log('New file detected')
+      alert('New File!')
     }
   },
   mounted: function () {
@@ -31,10 +44,13 @@ export default Vue.extend({
             target: Math.round(Math.random() * (id - 1))
           }))
       }
-      this.graph(this.$el).graphData(gData)
+      // Map this concretely to the graph id: DO NOT CHANGE
+      this.graph(document.getElementById('graph')).graphData(gData)
     })
+  },
+  components: {
+    FileSelect
   }
-
 })
 </script>
 
