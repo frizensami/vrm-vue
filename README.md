@@ -7,6 +7,7 @@ Represent an area of research (i.e. a set of research papers) **visually** to **
 - [Vue.js](https://vuejs.org/): Frontend framework
 - [3D-Force-Graph](https://github.com/vasturiano/3d-force-graph): 3D graph library
 - [Citation.js](https://github.com/larsgw/citation.js/): Reading citations
+- [Handsontable-Vue](https://github.com/handsontable/vue-handsontable-official) for displaying spreadsheet-like tables
 
 ## Conceptual planning
 User-configurable attributes of each paper

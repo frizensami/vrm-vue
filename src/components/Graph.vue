@@ -4,7 +4,7 @@
   <FileSelect v-on:new-file="onNewFile"/>
   <div id="graph">
   </div>
-  <SourceList v-bind:items='items'/>
+  <SourceTable v-bind:items='items'/>
 </div>
 
 </template>
@@ -13,7 +13,7 @@
 import Vue from 'vue'
 import ForceGraph3D from '3d-force-graph'
 import FileSelect from '@/components/FileSelect.vue'
-import SourceList from '@/components/SourceList.vue'
+import SourceTable from '@/components/SourceTable.vue'
 import Cite from 'citation-js'
 import Source from '@/classes/source.ts'
 import GraphUtils from '@/classes/graphUtils.ts'
@@ -66,7 +66,7 @@ export default Vue.extend({
   },
   components: {
     FileSelect,
-    SourceList
+    SourceTable
   }
 })
 </script>
