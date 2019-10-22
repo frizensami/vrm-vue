@@ -13,10 +13,12 @@ export default Vue.extend({
   },
   data: function () {
     return {
+      // Initialization
       graph: ForceGraph3D()
     }
   },
   mounted: function () {
+    // Run this function once the component is added to the DOM
     this.$nextTick(function () {
       // Random tree
       const N = 300
