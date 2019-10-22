@@ -4,6 +4,7 @@
   <FileSelect v-on:new-file="onNewFile"/>
   <div id="graph">
   </div>
+  <SourceList v-bind:items='items'/>
 </div>
 
 </template>
@@ -12,6 +13,7 @@
 import Vue from 'vue'
 import ForceGraph3D from '3d-force-graph'
 import FileSelect from '@/components/FileSelect.vue'
+import SourceList from '@/components/SourceList.vue'
 import Cite from 'citation-js'
 
 export default Vue.extend({
@@ -22,7 +24,8 @@ export default Vue.extend({
   data: function () {
     return {
       // Initialization
-      graph: ForceGraph3D()
+      graph: ForceGraph3D(),
+      items: {}
     }
   },
   methods: {
@@ -31,6 +34,7 @@ export default Vue.extend({
       console.log(newFile)
       if (newFile.type === 'application/json') {
         const fileBlob = newFile as any // Blob .text() not recognized
+        let outerThis: any = this
         fileBlob.text().then(function (results: string) {
           // List of objects
           const jsonFile: Array<Object> = JSON.parse(results)
@@ -38,6 +42,7 @@ export default Vue.extend({
 
           // Cite object representation of all references
           const cited = Cite(results)
+          outerThis.items = cited
         })
       }
     }
@@ -61,7 +66,8 @@ export default Vue.extend({
     })
   },
   components: {
-    FileSelect
+    FileSelect,
+    SourceList
   }
 })
 </script>
