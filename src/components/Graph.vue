@@ -16,6 +16,7 @@ import FileSelect from '@/components/FileSelect.vue'
 import SourceList from '@/components/SourceList.vue'
 import Cite from 'citation-js'
 import Source from '@/classes/source.ts'
+import GraphUtils from '@/classes/graphUtils.ts'
 
 export default Vue.extend({
   name: 'Graph',
@@ -50,6 +51,8 @@ export default Vue.extend({
             return new Source(citation)
           })
           outerThis.items = sourceList
+          let graphData = GraphUtils.sourceListToGraphData(sourceList)
+          outerThis.graph.graphData(graphData)
         })
       }
     }
@@ -57,19 +60,8 @@ export default Vue.extend({
   mounted: function () {
     // Run this function once the component is added to the DOM
     this.$nextTick(function () {
-      // Random tree
-      const N = 300
-      const gData = {
-        nodes: [...Array(N).keys()].map(i => ({ id: i })),
-        links: [...Array(N).keys()]
-          .filter(id => id)
-          .map(id => ({
-            source: id,
-            target: Math.round(Math.random() * (id - 1))
-          }))
-      }
       // Map this concretely to the graph id: DO NOT CHANGE
-      this.graph(document.getElementById('graph')).graphData(gData)
+      this.graph(document.getElementById('graph'))
     })
   },
   components: {
