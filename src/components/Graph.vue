@@ -15,6 +15,7 @@ import ForceGraph3D from '3d-force-graph'
 import FileSelect from '@/components/FileSelect.vue'
 import SourceList from '@/components/SourceList.vue'
 import Cite from 'citation-js'
+import Source from '@/classes/source.ts'
 
 export default Vue.extend({
   name: 'Graph',
@@ -25,12 +26,12 @@ export default Vue.extend({
     return {
       // Initialization
       graph: ForceGraph3D(),
-      items: {}
+      items: []
     }
   },
   methods: {
     onNewFile: function (newFile: File) {
-      // Read file and convert to json object
+      // Read file and convert to citation list
       console.log(newFile)
       if (newFile.type === 'application/json') {
         const fileBlob = newFile as any // Blob .text() not recognized
@@ -38,11 +39,17 @@ export default Vue.extend({
         fileBlob.text().then(function (results: string) {
           // List of objects
           const jsonFile: Array<Object> = JSON.parse(results)
-          console.log(jsonFile)
 
           // Cite object representation of all references
-          const cited = Cite(results)
-          outerThis.items = cited
+          const citationList = Cite(results)
+          console.log(citationList)
+
+          // Convert citation list to internal Source representaiton
+          // outerThis.items = citationList
+          const sourceList = citationList.data.map(function (citation: any) {
+            return new Source(citation)
+          })
+          outerThis.items = sourceList
         })
       }
     }

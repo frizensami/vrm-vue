@@ -25,7 +25,7 @@ import Cite from 'citation-js'
 export default Vue.extend({
   name: 'Graph',
   props: {
-    items: Object
+    items: Array
   }
 })
 </script>

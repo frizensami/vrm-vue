@@ -31,6 +31,17 @@ Graph / node attributes that can map onto paper attributes
 - A converter changes each Citation.js object into a `Source` object (project-specific intermediate type)
 - A `SourceFormatter` object (configured with a `Config` object) will collect the correct fields from the `Source` object to be displayed in the graph.
 
+## Status
+### Achieved
+- Can take a CSL-JSON file as user input
+- Can convert that to a list of Cite objects
+- Can display them as a list below the graph
+- Conversion of Cite list of sources into internal Source type
+### TODO
+- Change graph based on list of sources
+- Allow user configuration of graph display
+- Get useful metric from graph
+
 ## Project setup
 ```
 npm install
