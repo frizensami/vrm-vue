@@ -35,6 +35,9 @@ export default Vue.extend({
           // List of objects
           const jsonFile: Array<Object> = JSON.parse(results)
           console.log(jsonFile)
+
+          // Cite object representation of all references
+          const cited = Cite(results)
         })
       }
     }
