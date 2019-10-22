@@ -12,6 +12,7 @@
 import Vue from 'vue'
 import ForceGraph3D from '3d-force-graph'
 import FileSelect from '@/components/FileSelect.vue'
+import Cite from 'citation-js'
 
 export default Vue.extend({
   name: 'Graph',
@@ -25,9 +26,17 @@ export default Vue.extend({
     }
   },
   methods: {
-    onNewFile: function () {
-      console.log('New file detected')
-      alert('New File!')
+    onNewFile: function (newFile: File) {
+      // Read file and convert to json object
+      console.log(newFile)
+      if (newFile.type === 'application/json') {
+        const fileBlob = newFile as any // Blob .text() not recognized
+        fileBlob.text().then(function (results: string) {
+          // List of objects
+          const jsonFile: Array<Object> = JSON.parse(results)
+          console.log(jsonFile)
+        })
+      }
     }
   },
   mounted: function () {
