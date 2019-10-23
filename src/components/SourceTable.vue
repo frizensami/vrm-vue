@@ -39,16 +39,11 @@ export default {
   },
   watch: {
     items: function () {
-      console.log('Items changed!')
-      console.log(this)
-      console.log(this.$refs)
       let data = []
       for (const item of this.items) {
-        console.log(item)
         data.push([item.title, null])
       }
       this.$refs.hTable.hotInstance.loadData(data)
-      console.log(data)
     }
   }
 }
