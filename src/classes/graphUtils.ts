@@ -2,12 +2,17 @@
 import Source from '@/classes/source.ts'
 
 export default class GraphUtils {
-  static getRandomInt (min, max) {
+  public static setGraphData (graph: any, sourceList: Array<Source>) {
+    let graphData = GraphUtils.sourceListToGraphData(sourceList)
+    graph.graphData(graphData)
+  }
+
+  private static getRandomInt (min: any, max: any) {
     min = Math.ceil(min)
     max = Math.floor(max)
     return Math.floor(Math.random() * (max - min)) + min // The maximum is exclusive and the minimum is inclusive
   }
-  static sourceListToGraphData (sourceList: Array<Source>) {
+  private static sourceListToGraphData (sourceList: Array<Source>) {
     let graphData: any = {
       nodes: [],
       links: []

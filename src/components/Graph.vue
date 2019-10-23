@@ -50,9 +50,10 @@ export default Vue.extend({
           const sourceList = citationList.data.map(function (citation: any) {
             return new Source(citation)
           })
+          // Set list for table
           outerThis.items = sourceList
-          let graphData = GraphUtils.sourceListToGraphData(sourceList)
-          outerThis.graph.graphData(graphData)
+          // Update graph with nodes
+          GraphUtils.setGraphData(outerThis.graph, sourceList)
         })
       }
     }

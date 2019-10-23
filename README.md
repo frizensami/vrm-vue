@@ -12,6 +12,7 @@ Represent an area of research (i.e. a set of research papers) **visually** to **
 ## Conceptual planning
 User-configurable attributes of each paper
 - Significance value (i.e. how important do you consider this paper to be?)
+- Categorie(s): categorizes each paper into a set of categories
 
 Auto-inferred for each paper (aim)
 - Number cited by
