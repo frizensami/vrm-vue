@@ -31,7 +31,8 @@ export default {
         columns: [
           { data: 'id', className: 'htLeft' },
           { title: 'Title', data: 'title', className: 'htLeft' },
-          { title: 'Significance', data: 'userSignificance' }
+          { title: 'Significance', data: 'userSignificance' },
+          { title: 'Group', data: 'group' }
         ],
         hiddenColumns: {
           columns: [0],

@@ -12,6 +12,7 @@ export default class GraphUtils {
       .nodeId('id')
       .nodeLabel('title')
       .nodeVal('userSignificance')
+      .nodeAutoColorBy('group')
   }
 
   public static updateGraphData (graph: any, id: any, property: any, oldVal: any, newVal: any) {
