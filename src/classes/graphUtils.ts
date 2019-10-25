@@ -4,7 +4,8 @@ import Source from '@/classes/source.ts'
 export default class GraphUtils {
   public static setGraphData (graph: any, sourceList: Array<Source>) {
     // Get nodes and links
-    let graphData = GraphUtils.sourceListToGraphData(sourceList)
+    let copiedSource = JSON.parse(JSON.stringify(sourceList))
+    let graphData = GraphUtils.sourceListToGraphData(copiedSource)
     // Set data + attributes
     graph
       .graphData(graphData)

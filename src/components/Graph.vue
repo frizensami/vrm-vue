@@ -4,7 +4,7 @@
   <FileSelect v-on:new-file="onNewFile"/>
   <div id="graph">
   </div>
-  <SourceTable v-bind:items='items'/>
+  <SourceTable v-on:new-table="onNewTable" v-on:update-table="onUpdateTable" ref="childTable"/>
 </div>
 
 </template>
@@ -51,11 +51,25 @@ export default Vue.extend({
             return new Source(citation)
           })
           // Set list for table
-          outerThis.items = sourceList
+          // outerThis.items = sourceList
+          console.log('Sending sourceList:')
+          console.log(sourceList)
+          outerThis.$refs.childTable.loadTable(sourceList)
           // Update graph with nodes
-          GraphUtils.setGraphData(outerThis.graph, sourceList)
+          // GraphUtils.setGraphData(outerThis.graph, sourceList)
         })
       }
+    },
+    onNewTable: function (newTable: any) {
+      // Read file and convert to citation list
+      console.log('Received new table')
+      console.log(newTable)
+      GraphUtils.setGraphData(this.graph, newTable)
+    },
+    onUpdateTable: function (update: any) {
+      // Read file and convert to citation list
+      console.log('Received new update')
+      console.log(update)
     }
   },
   mounted: function () {
