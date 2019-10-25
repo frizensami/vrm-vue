@@ -30,8 +30,8 @@ export default {
         colHeaders: true,
         columns: [
           { data: 'id', className: 'htLeft' },
-          { data: 'title', className: 'htLeft' },
-          { data: 'userSignificance' }
+          { title: 'Title', data: 'title', className: 'htLeft' },
+          { title: 'Significance', data: 'userSignificance' }
         ],
         hiddenColumns: {
           columns: [0],
