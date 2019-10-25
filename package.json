@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "3d-force-graph": "^1.55.13",
+    "@citation-js/date": "^0.4.4",
     "@handsontable/vue": "^4.1.0",
     "citation-js": "^0.5.0-alpha.4",
     "core-js": "^3.1.2",

@@ -9,13 +9,19 @@
   </hot-table>
 </template>
 
+<script src="~pikaday/pikaday.js"></script>
+<script src="~moment/moment.js"></script>
+
 <style lang="css">
 @import '~handsontable/dist/handsontable.full.css';
+@import '~pikaday/css/pikaday.css';
 </style>
 
 <script>
 import { HotTable } from '@handsontable/vue'
 import Handsontable from 'handsontable'
+import Moment from 'moment'
+import Pikaday from 'pikaday'
 
 export default {
   data: function () {
@@ -31,6 +37,11 @@ export default {
         columns: [
           { data: 'id', className: 'htLeft' },
           { title: 'Title', data: 'title', className: 'htLeft' },
+          { title: 'Date',
+            data: 'datestring',
+            type: 'date',
+            className: 'htLeft',
+          },
           { title: 'Significance', data: 'userSignificance' },
           { title: 'Group', data: 'group' }
         ],
