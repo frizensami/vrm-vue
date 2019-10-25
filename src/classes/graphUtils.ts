@@ -14,6 +14,16 @@ export default class GraphUtils {
       .nodeVal('userSignificance')
   }
 
+  public static updateGraphData (graph: any, id: any, property: any, oldVal: any, newVal: any) {
+    let graphData = graph.graphData()
+    for (let node of graphData.nodes) {
+      if (node.id === id) {
+        node[property] = newVal
+        graph.refresh()
+      }
+    }
+  }
+
   static getRandomInt (min: any, max: any) {
     min = Math.ceil(min)
     max = Math.floor(max)
@@ -24,14 +34,6 @@ export default class GraphUtils {
       nodes: [],
       links: []
     }
-    /*
-    graphData.nodes = sourceList.map(function (source) {
-      return {
-        id: source.id,
-        name: source.title
-      }
-    })
-    */
     graphData.nodes = sourceList
 
     for (let i = 0; i < graphData.nodes.length; i++) {

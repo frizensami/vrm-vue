@@ -26,12 +26,17 @@ export default {
         stretchH: 'all',
         licenseKey: 'non-commercial-and-evaluation',
         startRows: 5,
-        startCols: 2,
+        startCols: 3,
         colHeaders: true,
         columns: [
+          { data: 'id', className: 'htLeft' },
           { data: 'title', className: 'htLeft' },
           { data: 'userSignificance' }
         ],
+        hiddenColumns: {
+          columns: [0],
+          indicators: false
+        },
         afterChange: function (changes) {
           if (changes == null) return
           for (const change of changes) {
@@ -49,6 +54,7 @@ export default {
   },
   methods: {
     loadTable (items) {
+      this.items = items
       this.$refs.hTable.hotInstance.loadData(items)
       this.$emit('new-table', items)
     },
@@ -56,6 +62,7 @@ export default {
       const [row, property, oldVal, newVal] = change
       this.$emit('update-table', {
         // ASSUME THIS IS THE UNIQUE ID AND COLUMNS CANNOT BE SWAPPED
+        // The id column is hidden, so it's legit
         id: this.$refs.hTable.hotInstance.getDataAtRow(row)[0],
         property: property,
         oldVal: oldVal,

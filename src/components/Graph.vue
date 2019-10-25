@@ -70,6 +70,7 @@ export default Vue.extend({
       // Read file and convert to citation list
       console.log('Received new update')
       console.log(update)
+      GraphUtils.updateGraphData(this.graph, update.id, update.property, update.oldVal, update.newVal)
     }
   },
   mounted: function () {
