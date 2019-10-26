@@ -40,6 +40,8 @@ export default {
           { title: 'Date',
             data: 'datestring',
             type: 'date',
+            type: 'date',
+            dateFormat: 'Do MMM YYYY',
             className: 'htLeft',
           },
           { title: 'Significance', data: 'userSignificance' },
