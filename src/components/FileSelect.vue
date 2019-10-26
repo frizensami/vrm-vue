@@ -8,7 +8,7 @@
   </label>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data: function () {
     return {
@@ -21,7 +21,7 @@ export default {
      * Emits the File object to the parent
      * @param e File Event
      */
-    handleFileChange (e) {
+    handleFileChange (e: any) {
       let newfile = e.target.files[0]
       this.$emit('new-file', newfile)
       this.file = newfile

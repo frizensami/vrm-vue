@@ -44,7 +44,7 @@ export default Vue.extend({
           // Cite object representation of all references
           const citationList = Cite(results)
           // Convert citation list to internal Source representaiton
-          const sourceList = citationList.data.map(function (citation: any) {
+          const sourceList : Array<Source> = citationList.data.map(function (citation: any) {
             return new Source(citation)
           })
           // Update table
@@ -57,7 +57,7 @@ export default Vue.extend({
      * We force graph to initialize with this data
      * @param newTable List of Source objects
      */
-    onNewTable: function (newTable: any) {
+    onNewTable: function (newTable: Array<Source>) {
       // Read file and convert to citation list
       GraphUtils.setGraphData(this.graph, newTable)
     },
