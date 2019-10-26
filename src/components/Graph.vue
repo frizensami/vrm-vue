@@ -20,61 +20,62 @@ import GraphUtils from '@/classes/graphUtils.ts'
 
 export default Vue.extend({
   name: 'Graph',
-  props: {
-    msg: String
-  },
   data: function () {
     return {
-      // Initialization
-      graph: ForceGraph3D(),
-      items: []
+      // Graph initialization (displays nothing)
+      graph: ForceGraph3D()
     }
   },
   methods: {
+    /**
+     * Reads the file uploaded by user, converts to citation list,
+     * then creates internal representation (Source) objects,
+     * calls method to load table with these objects
+     * @param newFile File object from new-file event
+     */
     onNewFile: function (newFile: File) {
-      // Read file and convert to citation list
-      console.log(newFile)
+      // We only care about CSL-JSON
       if (newFile.type === 'application/json') {
         const fileBlob = newFile as any // Blob .text() not recognized
-        let outerThis: any = this
+        let outerThis: any = this // this clobbered in callback
         fileBlob.text().then(function (results: string) {
-          // List of objects
+          // Javascript representation of JSON file
           const jsonFile: Array<Object> = JSON.parse(results)
-
           // Cite object representation of all references
           const citationList = Cite(results)
-          console.log(citationList)
-
           // Convert citation list to internal Source representaiton
-          // outerThis.items = citationList
           const sourceList = citationList.data.map(function (citation: any) {
             return new Source(citation)
           })
-          // Set list for table
-          // outerThis.items = sourceList
-          console.log('Sending sourceList:')
-          console.log(sourceList)
+          // Update table
           outerThis.$refs.childTable.loadTable(sourceList)
-          // Update graph with nodes
-          // GraphUtils.setGraphData(outerThis.graph, sourceList)
         })
       }
     },
+    /**
+     * Table component emits new-table event:
+     * We force graph to initialize with this data
+     * @param newTable List of Source objects
+     */
     onNewTable: function (newTable: any) {
       // Read file and convert to citation list
-      console.log('Received new table')
-      console.log(newTable)
       GraphUtils.setGraphData(this.graph, newTable)
     },
+    /**
+     * Fired every time a row in the table is updated
+     * We get graph to update a single node with the change
+     * @param update A dict indicating what was updated
+     */
     onUpdateTable: function (update: any) {
       // Read file and convert to citation list
-      console.log('Received new update')
-      console.log(update)
       GraphUtils.updateGraphData(this.graph, update.id, update.property, update.oldVal, update.newVal)
     }
   },
+  /**
+   * Runs once after component mount to place the graph in the DOM
+   * The graph needs a reference to the exact DOM element it's placed in
+   */
   mounted: function () {
-    // Run this function once the component is added to the DOM
     this.$nextTick(function () {
       // Map this concretely to the graph id: DO NOT CHANGE
       this.graph(document.getElementById('graph'))

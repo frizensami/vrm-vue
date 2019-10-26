@@ -1,16 +1,7 @@
 <template>
   <hot-table :settings="hotSettings" ref="hTable">
-    <!--
-    <hot-column title="Title">
-    </hot-column>
-    <hot-column title="Significance">
-    </hot-column>
-    -->
   </hot-table>
 </template>
-
-<script src="~pikaday/pikaday.js"></script>
-<script src="~moment/moment.js"></script>
 
 <style lang="css">
 @import '~handsontable/dist/handsontable.full.css';
@@ -20,6 +11,8 @@
 <script>
 import { HotTable } from '@handsontable/vue'
 import Handsontable from 'handsontable'
+// These two imports that follow are necessary for date picker and formatting
+// in handsontable
 import Moment from 'moment'
 import Pikaday from 'pikaday'
 
@@ -40,9 +33,8 @@ export default {
           { title: 'Date',
             data: 'datestring',
             type: 'date',
-            type: 'date',
             dateFormat: 'Do MMM YYYY',
-            className: 'htLeft',
+            className: 'htLeft'
           },
           { title: 'Significance', data: 'userSignificance' },
           { title: 'Group', data: 'group' }
@@ -67,11 +59,24 @@ export default {
     HotTable
   },
   methods: {
+    /**
+     * Called by parent to load the array of objects into the table.
+     * new-table is emitted to force the parent to initialize the
+     *  graph with this data.
+     * The columns option in hotSettings will tell the table how to display
+     * the array of Source objects it will load from this function
+     * @param items Array of Source objects for the table
+     */
     loadTable (items) {
       this.items = items
       this.$refs.hTable.hotInstance.loadData(items)
       this.$emit('new-table', items)
     },
+    /**
+     * Called on every change to the table. Emits event to force
+     * graph to update the node affected by this change.
+     * @param change Array of values representing this change
+     */
     emitChange (change) {
       const [row, property, oldVal, newVal] = change
       this.$emit('update-table', {

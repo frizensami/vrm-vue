@@ -12,11 +12,15 @@
 export default {
   data: function () {
     return {
-      // Initialization
       file: null
     }
   },
   methods: {
+    /**
+     * When a file is uploaded, this event fires.
+     * Emits the File object to the parent
+     * @param e File Event
+     */
     handleFileChange (e) {
       let newfile = e.target.files[0]
       this.$emit('new-file', newfile)
